@@ -27,9 +27,12 @@ jobs:
       - run: pkgx --version
 
   shellcheck:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v4     
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
       - uses: reviewdog/action-shellcheck@v1
 
   usage-as-proxy:
@@ -68,8 +71,7 @@ jobs:
         shell: bash -e {0}
 
       # check pkgx was installed despite executing via `eval`
-      - run:
-          pkgx duf --version
+      - run: pkgx duf --version
 
   eval-zsh:
     runs-on: ubuntu-latest
@@ -173,8 +175,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run:
-          curl https://dist.pkgx.dev/pkgx.sh/linux/x86-64/v1.0.0.tar.gz |
+      - run: curl https://dist.pkgx.dev/pkgx.sh/linux/x86-64/v1.0.0.tar.gz |
           tar xz --strip-components=3
       - run: mv pkgx /usr/local/bin
       - run: test "$(pkgx --version)" = 'pkgx 1.0.0'
