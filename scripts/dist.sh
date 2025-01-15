@@ -18,4 +18,4 @@ rm -rf koffi_linux_arm32hf
 rm -rf koffi_linux_riscv64hf64
 
 cd ../../out
-ln -s ../../installer.sh
+ln -s ../../installer.sh # FIXME
