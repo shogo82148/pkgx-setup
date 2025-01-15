@@ -26,13 +26,13 @@ _install_pre_reqs() {
       export DEBIAN_FRONTEND=noninteractive
       cmd=$1
       shift
-      $SUDO apt-get $cmd -qq -o=Dpkg::Use-Pty=0 $@
+      $SUDO apt-get $cmd -qq -o=Dpkg::Use-Pty=0 $@ # FIXME
     }
   else
     apt() {
       case "$1" in
       update)
-        echo "ensure you have the `pkgx` pre-requisites installed:" >&2
+        echo "ensure you have the `pkgx` pre-requisites installed:" >&2 # FIXME
         ;;
       install)
         echo "   apt-get" "$@" >&2
@@ -40,11 +40,11 @@ _install_pre_reqs() {
       esac
     }
     yum() {
-      echo "ensure you have the `pkgx` pre-requisites installed:" >&2
+      echo "ensure you have the `pkgx` pre-requisites installed:" >&2 # FIXME
       echo "   yum" "$@" >&2
     }
     pacman() {
-      echo "ensure you have the `pkgx` pre-requisites installed:" >&2
+      echo "ensure you have the `pkgx` pre-requisites installed:" >&2 # FIXME
       echo "   pacman" "$@" >&2
     }
   fi
@@ -132,7 +132,7 @@ _pkgx_is_old() {
   v="$(/usr/local/bin/pkgx --version || echo pkgx 0)"
   /usr/local/bin/pkgx --silent semverator gt \
     $(curl -Ssf https://pkgx.sh/VERSION) \
-    $(echo $v | awk '{print $2}')
+    $(echo $v | awk '{print $2}') # FIXME
 }
 
 _should_install_pkgx() {
@@ -157,7 +157,7 @@ _install_pre_reqs
 
 if [ $# -gt 0 ]; then
   pkgx "$@"
-elif [ $(basename "/$0") != 'installer.sh' ]; then
+elif [ $(basename "/$0") != 'installer.sh' ]; then # FIXME
   # ^^ temporary exception for action.ts
 
   if type eval >/dev/null 2>&1; then
